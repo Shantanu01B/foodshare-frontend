@@ -183,13 +183,14 @@ const CompactHeroSlider = () => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
         }, 5000);
         return () => clearInterval(interval);
-    }, [slides.length]);
+    }, []);
 
     const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
     const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
     return (
-        <div className="relative w-full h-124 overflow-hidden"> {/* Full width, removed rounded corners */}
+        <div className="relative w-full h-[500px] sm:h-[600px] md:h-[650px] overflow-hidden rounded-none">
+
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentSlide}
@@ -200,24 +201,28 @@ const CompactHeroSlider = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1 }}
                 >
-                    <div className="absolute inset-0 bg-black/20"></div>
-                    <div className="text-center text-white relative z-10 max-w-6xl px-8 w-full">
+                    <div className="absolute inset-0 bg-black/25"></div>
+
+                    <div className="text-center text-white relative z-10 max-w-4xl px-4 w-full">
+
                         <motion.h1
-                            className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight"
+                            className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-snug"
                             initial={{ y: 50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.8 }}
                         >
                             {slides[currentSlide].title}
                         </motion.h1>
+
                         <motion.p
-                            className="text-xl md:text-2xl font-light mb-10 max-w-3xl mx-auto"
+                            className="text-base sm:text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto"
                             initial={{ y: 30, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                         >
                             {slides[currentSlide].subtitle}
                         </motion.p>
+
                     </div>
                 </motion.div>
             </AnimatePresence>
@@ -225,45 +230,45 @@ const CompactHeroSlider = () => {
             {/* Navigation Arrows */}
             <button
                 onClick={prevSlide}
-                className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white text-4xl z-20 hover:scale-110 transition bg-black/30 rounded-full w-12 h-12 flex items-center justify-center"
+                className="absolute left-3 sm:left-6 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-4xl z-20 hover:scale-110 bg-black/30 rounded-full w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center"
             >
                 ‹
             </button>
+
             <button
                 onClick={nextSlide}
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 text-white text-4xl z-20 hover:scale-110 transition bg-black/30 rounded-full w-12 h-12 flex items-center justify-center"
+                className="absolute right-3 sm:right-6 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-4xl z-20 hover:scale-110 bg-black/30 rounded-full w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center"
             >
                 ›
             </button>
 
-            {/* Dots Indicator */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
-                {slides.map((_, index) => (
+            {/* Indicator Dots */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+                {slides.map((_, idx) => (
                     <button
-                        key={index}
-                        onClick={() => setCurrentSlide(index)}
-                        className={`w-4 h-4 rounded-full transition-all ${
-                            index === currentSlide ? 'bg-white scale-125' : 'bg-white/50'
-                        }`}
+                        key={idx}
+                        onClick={() => setCurrentSlide(idx)}
+                        className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${idx === currentSlide ? "bg-white scale-125" : "bg-white/50"}`}
                     />
                 ))}
             </div>
 
-            {/* CTA Overlay */}
-            <motion.div 
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-center"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+            {/* CTA Buttons */}
+            <motion.div
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 text-center"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
             >
                 <div className="flex flex-col sm:flex-row gap-4">
                     <Link to="/register">
-                        <Button variant="secondary" className="text-lg py-4 px-10">
-                            Join The Movement
+                        <Button variant="secondary" className="hero-btn">
+                            Join the Movement
                         </Button>
                     </Link>
+
                     <Link to="/login">
-                        <Button variant="outline" className="text-lg py-4 px-10 bg-white/20 border-white text-white hover:bg-white/30">
+                        <Button variant="outline" className="hero-btn text-white border-white bg-white/20 hover:bg-white/30">
                             View Live Impact
                         </Button>
                     </Link>
@@ -272,6 +277,7 @@ const CompactHeroSlider = () => {
         </div>
     );
 };
+
 
 // Main Landing Page Component
 export default function LandingPage() {

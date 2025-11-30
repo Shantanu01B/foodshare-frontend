@@ -104,3 +104,29 @@ a:focus-visible {
   outline: 2px solid #0d9488;
   outline-offset: 2px;
 }
+
+
+html, body {
+  overflow-x: hidden;
+}
+
+.hero-btn {
+  @apply text-sm sm:text-base md:text-lg px-6 py-3 w-full sm:w-auto rounded-xl font-semibold;
+}
+
+@media (max-width: 480px) {
+  .hero-btn {
+    @apply text-sm px-4 py-2;
+  }
+}
+
+.hero-arrow,
+.slick-arrow {
+  transform: scale(0.8);
+}
+
+@media (max-width: 480px) {
+  .hero-arrow {
+    transform: scale(0.6);
+  }
+}
