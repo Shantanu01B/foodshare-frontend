@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 // Gemini API Configuration
 // ⚠️ IMPORTANT: Replace this with your actual Gemini API key
 // Get it from: https://makersuite.google.com/app/apikey
-const GEMINI_API_KEY = "AIzaSyCvI2GEdcINxkvaWaRz4qHbOehN2QDOhJ4"; // ← REPLACE THIS
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
 
 export default function DashboardWastePartner() {
