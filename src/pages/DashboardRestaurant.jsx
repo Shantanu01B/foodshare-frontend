@@ -17,8 +17,14 @@ export default function DashboardRestaurant() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const completedDonations = myDonations.filter(d => d.status === 'completed');
-  const activeDonations = myDonations.filter(d => d.status !== 'completed');
+  const completedDonations = myDonations.filter(
+    d => d.status === 'completed' || d.status === 'recycled'
+  );
+
+  const activeDonations = myDonations.filter(
+    d => d.status !== 'completed' && d.status !== 'recycled'
+  );
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-100 py-8">

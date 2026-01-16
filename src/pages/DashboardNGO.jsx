@@ -43,7 +43,9 @@ export default function DashboardNGO() {
   };
 
   const acceptedDonations = myDonations.filter(d => d.status === 'accepted' || d.status === 'picked');
-  const completedCount = myDonations.filter(d => d.status === 'completed').length;
+  const completedCount = myDonations.filter(
+    d => d.status === 'completed' || d.status === 'recycled'
+  ).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-100 py-8">

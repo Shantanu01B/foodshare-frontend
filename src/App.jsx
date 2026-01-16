@@ -11,16 +11,32 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    // Logic to redirect authenticated users from /login and /register
-        if (user && (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/')) {
+    if (
+      user &&
+      (location.pathname === '/login' ||
+        location.pathname === '/register' ||
+        location.pathname === '/')
+    ) {
       const role = user.role;
       let homePath;
+
       switch (role) {
-        case 'restaurant': homePath = '/home/restaurant'; break;
-        case 'ngo': homePath = '/home/ngo'; break;
-        case 'volunteer': homePath = '/home/volunteer'; break;
-        default: homePath = '/';
+        case 'restaurant':
+          homePath = '/home/restaurant';
+          break;
+        case 'ngo':
+          homePath = '/home/ngo';
+          break;
+        case 'volunteer':
+          homePath = '/home/volunteer';
+          break;
+        case 'waste_partner':               // ✅ NEW
+          homePath = '/dashboard/waste-partner';
+          break;
+        default:
+          homePath = '/';
       }
+
       if (homePath !== '/') {
         navigate(homePath, { replace: true });
       }
