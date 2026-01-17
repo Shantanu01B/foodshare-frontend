@@ -80,15 +80,24 @@ export default function DonationCard({
             />
 
             {/* STATUS BADGE (FIXED & CLEAR) */}
-            <div className="absolute top-4 right-4 text-xs font-bold px-3 py-2 rounded-full bg-green-500 text-white">
-              {user?.role === "volunteer" && donation.status === "accepted"
-                ? "READY FOR PICKUP"
-                : user?.role === "ngo" && donation.status === "accepted"
-                ? "ACCEPTED • READY FOR PICKUP"
-                : isRecycled
-                ? "RECYCLED ♻️"
-                : donation.status.toUpperCase()}
-            </div>
+            <div
+            className={`absolute top-4 right-4 text-xs font-bold px-3 py-2 rounded-full text-white
+              ${donation.status === "expired"
+                ? "bg-red-600"
+                : donation.status === "completed"
+                ? "bg-gray-600"
+                : donation.status === "accepted"
+                ? "bg-blue-600"
+                : "bg-green-500"
+              }`}
+          >
+            {user?.role === "volunteer" && donation.status === "accepted"
+              ? "READY FOR PICKUP"
+              : user?.role === "ngo" && donation.status === "accepted"
+              ? "ACCEPTED • READY FOR PICKUP"
+              : donation.status.toUpperCase()}
+          </div>
+
 
             {isUrgent && (
               <div className="absolute top-4 left-4 bg-red-600 text-white text-xs px-3 py-2 rounded-full">
